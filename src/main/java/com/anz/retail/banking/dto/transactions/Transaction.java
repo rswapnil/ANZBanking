@@ -1,10 +1,16 @@
 package com.anz.retail.banking.dto.transactions;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Transaction {
 	
+	@ApiModelProperty(notes = "Account Number")
 	private String accountNumber;
+	@ApiModelProperty(notes = "Account Name")
 	private String accountName;
+	@ApiModelProperty(notes = "Value Date")
 	private String valueDate;
+	@ApiModelProperty(notes = "Account Currency")
 	private String currency;
 	private String debitAmount;
 	private String creditAmout;

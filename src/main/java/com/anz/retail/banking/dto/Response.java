@@ -2,11 +2,17 @@ package com.anz.retail.banking.dto;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Response<T> {
 	
+	@ApiModelProperty(notes = "Validation Message for User")
 	private String validation;
+	@ApiModelProperty(notes = "Error Message for User")
 	private String error;
+	@ApiModelProperty(notes = "User Data for screen")
 	private T data;
+	@ApiModelProperty(notes = "Column Header Data for screen")
 	private List<Header> headers;
 
 	public Response() {

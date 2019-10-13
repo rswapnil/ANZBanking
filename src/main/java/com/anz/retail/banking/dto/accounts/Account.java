@@ -1,15 +1,35 @@
 package com.anz.retail.banking.dto.accounts;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class Account {
 	
+	@ApiModelProperty(notes = "Account Number")
 	private String number;
+	@ApiModelProperty(notes = "Account Name")
 	private String name;
+	@ApiModelProperty(notes = "Account Type")
 	private String type;
+	@ApiModelProperty(notes = "Balance Date")
 	private String balanceDate;
+	@ApiModelProperty(notes = "Account Currency")
 	private String currency;
+	@ApiModelProperty(notes = "Opening Available Balance")
 	private String openingBalance;
+	@ApiModelProperty(notes = "AccountId - will be used for invoking User Transactions API")
+	private Long accountId;
 	
 	
+	public Long getAccountId() {
+		return accountId;
+	}
+
+
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
+	}
+
+
 	public Account() {
 		super();
 	}
@@ -75,9 +95,10 @@ public class Account {
 	}
 
 
-	public Account(String number, String name, String type, String balanceDate, String currency,
+	public Account(Long accountId, String number, String name, String type, String balanceDate, String currency,
 			String openingBalance) {
 		super();
+		this.accountId = accountId;
 		this.number = number;
 		this.name = name;
 		this.type = type;

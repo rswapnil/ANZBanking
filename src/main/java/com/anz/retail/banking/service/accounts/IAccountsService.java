@@ -10,6 +10,6 @@ public interface IAccountsService {
 
 	Response<List<Account>> getUserAccounts(Long userId);
 
-	Response<List<Transaction>> getUserAccountTransactions(Long accountId);
+	Response<List<Transaction>> getUserAccountTransactions(Long userId, Long accountId);
 
 }

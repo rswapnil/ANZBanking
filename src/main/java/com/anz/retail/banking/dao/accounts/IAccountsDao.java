@@ -9,6 +9,10 @@ public interface IAccountsDao {
 
 	List<Account> getUserAccountsForUserId(Long userId);
 
-	List<Transaction> getUserAccountTransactionsForAccountId(Long accountId);
+	List<Transaction> getUserAccountTransactionsForAccountId(Long userId, Long accountId);
+
+	boolean isInvalidUserId(Long userId);
+
+	boolean isInvalidAccountId(Long accountId);
 
 }

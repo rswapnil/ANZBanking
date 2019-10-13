@@ -32,7 +32,7 @@ public class AccountsControllerTest {
 	
 	@Test
 	public void testGetUserAccountsValidUser() {
-		Response<List<Account>> response = restTemplate.getForObject("http://localhost:" + port + "/anz/accounts/" + 1, 
+		Response<List<Account>> response = restTemplate.getForObject("http://localhost:" + port + "/anz/user/1/accounts/", 
 				Response.class);
 				
 		assertNotNull("Accounts List must not be null", response.getData());
@@ -42,16 +42,16 @@ public class AccountsControllerTest {
 
 	@Test
 	public void testGetUserAccountsInValidUser() {
-		Response<List<Account>> response = restTemplate.getForObject("http://localhost:" + port + "/anz/accounts/" + 10, 
+		Response<List<Account>> response = restTemplate.getForObject("http://localhost:" + port + "/anz/user/0/accounts/", 
 				Response.class);
 				
-		assertNotNull("Accounts List must not be null", response.getData());
-		assertEquals("Size must be 0", 0, response.getData().size());
+		assertNull("Accounts List must be null", response.getData());
+		assertEquals("Validation Error must be set", "Invalid UserId", response.getValidation());
 	}
 
 	@Test
 	public void testGetUserAccountTransactionsValidAccount() {
-		Response<List<Account>> response = restTemplate.getForObject("http://localhost:" + port + "/anz/accounts/" + 1 + "/transactions", 
+		Response<List<Account>> response = restTemplate.getForObject("http://localhost:" + port + "/anz/user/1/account/1/transactions", 
 				Response.class);
 				
 		assertNotNull("Account Transactions List must not be null", response.getData());
@@ -61,11 +61,11 @@ public class AccountsControllerTest {
 
 	@Test
 	public void testGetUserAccountTransactionsInvalidAccount() {
-		Response<List<Account>> response = restTemplate.getForObject("http://localhost:" + port + "/anz/accounts/" + 10 + "/transactions", 
+		Response<List<Account>> response = restTemplate.getForObject("http://localhost:" + port + "/anz/user/1/account/0/transactions", 
 				Response.class);
 				
-		assertNotNull("Account Transactions List must not be null", response.getData());
-		assertEquals("Size must be 0", 0, response.getData().size());
+		assertNull("Account Transactions List must be null", response.getData());
+		assertEquals("Validation Error must be set", "Invalid AccountId", response.getValidation());
 	}
 
 }

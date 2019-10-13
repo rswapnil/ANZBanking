@@ -53,7 +53,7 @@ public class AccountsService implements IAccountsService {
 		
 		try {
 			
-			if (userId <= 0) {
+			if (userId <= 0 || isInvalidUserId(userId)) {
 				logger.info("Invalid UserId");
 				response.setValidation("Invalid UserId");
 				return response;
@@ -70,19 +70,33 @@ public class AccountsService implements IAccountsService {
 		return response;
 	}
 
+	private boolean isInvalidUserId(Long userId) {
+		return accountsDao.isInvalidUserId(userId);
+	}
+
+	private boolean isInvalidAccountId(Long userId) {
+		return accountsDao.isInvalidAccountId(userId);
+	}
+
 	@Override
-	public Response<List<Transaction>> getUserAccountTransactions(Long accountId) {
+	public Response<List<Transaction>> getUserAccountTransactions(Long userId, Long accountId) {
 		Response<List<Transaction>> response = new Response<>();
 		
 		try {
 			
-			if (accountId <= 0) {
+			if (userId <= 0 || isInvalidUserId(userId)) {
+				logger.info("Invalid UserId");
+				response.setValidation("Invalid UserId");
+				return response;
+			}
+
+			if (accountId <= 0 || isInvalidAccountId(accountId)) {
 				logger.info("Invalid AccountId");
 				response.setValidation("Invalid AccountId");
 				return response;
 			}
 			
-			response.setData(accountsDao.getUserAccountTransactionsForAccountId(accountId));
+			response.setData(accountsDao.getUserAccountTransactionsForAccountId(userId, accountId));
 			response.setHeaders(ACCOUNT_TRANSACTION_HEADERS);
 
 			
